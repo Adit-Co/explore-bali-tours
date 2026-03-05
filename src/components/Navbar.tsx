@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogIn } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +13,8 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const navigate = useNavigate();
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -55,6 +59,15 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <Button
+            variant={scrolled ? "hero" : "outline-light"}
+            size="sm"
+            onClick={() => navigate("/login")}
+            className="gap-2"
+          >
+            <LogIn className="w-4 h-4" />
+            Masuk
+          </Button>
         </div>
 
         {/* Mobile toggle */}
@@ -85,6 +98,15 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <Button
+            variant="hero"
+            size="sm"
+            onClick={() => { setMenuOpen(false); navigate("/login"); }}
+            className="w-full gap-2"
+          >
+            <LogIn className="w-4 h-4" />
+            Masuk
+          </Button>
         </motion.div>
       )}
     </motion.nav>
