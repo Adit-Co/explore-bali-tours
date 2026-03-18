@@ -4,6 +4,7 @@ import { X, Star, Clock, MapPin, Check, Users, Minus, Plus } from "lucide-react"
 import { Tour } from "@/data/tours";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useOrders } from "@/context/OrderContext";
 
 interface TourDetailModalProps {
   tour: Tour | null;
