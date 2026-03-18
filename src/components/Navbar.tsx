@@ -62,6 +62,20 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <button
+            onClick={() => setShowOrders(true)}
+            className={`relative text-sm font-body font-medium transition-colors hover:text-accent flex items-center gap-1.5 ${
+              scrolled ? "text-foreground" : "text-primary-foreground/80"
+            }`}
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Cek Pesanan
+            {pendingCount > 0 && (
+              <span className="absolute -top-2 -right-3 w-5 h-5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold flex items-center justify-center">
+                {pendingCount}
+              </span>
+            )}
+          </button>
           <Button
             variant={scrolled ? "hero" : "outline-light"}
             size="sm"
