@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useOrders } from "@/context/OrderContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
