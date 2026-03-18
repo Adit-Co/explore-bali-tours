@@ -14,6 +14,7 @@ interface TourDetailModalProps {
 const TourDetailModal = ({ tour, onClose }: TourDetailModalProps) => {
   const [guests, setGuests] = useState(1);
   const { toast } = useToast();
+  const { addOrder } = useOrders();
 
   if (!tour) return null;
 
