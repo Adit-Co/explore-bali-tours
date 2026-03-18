@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X, LogIn, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useOrders } from "@/context/OrderContext";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -15,6 +16,8 @@ const Navbar = () => {
   }, []);
 
   const navigate = useNavigate();
+  const { orders, setShowOrders } = useOrders();
+  const pendingCount = orders.filter((o) => o.status === "pending").length;
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -59,6 +62,20 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <button
+            onClick={() => setShowOrders(true)}
+            className={`relative text-sm font-body font-medium transition-colors hover:text-accent flex items-center gap-1.5 ${
+              scrolled ? "text-foreground" : "text-primary-foreground/80"
+            }`}
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Cek Pesanan
+            {pendingCount > 0 && (
+              <span className="absolute -top-2 -right-3 w-5 h-5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold flex items-center justify-center">
+                {pendingCount}
+              </span>
+            )}
+          </button>
           <Button
             variant={scrolled ? "hero" : "outline-light"}
             size="sm"
@@ -98,6 +115,18 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <button
+            onClick={() => { setMenuOpen(false); setShowOrders(true); }}
+            className="flex items-center gap-2 text-sm font-body font-medium text-foreground hover:text-accent transition-colors"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Cek Pesanan
+            {pendingCount > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold flex items-center justify-center">
+                {pendingCount}
+              </span>
+            )}
+          </button>
           <Button
             variant="hero"
             size="sm"

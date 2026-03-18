@@ -4,6 +4,7 @@ import { X, Star, Clock, MapPin, Check, Users, Minus, Plus } from "lucide-react"
 import { Tour } from "@/data/tours";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useOrders } from "@/context/OrderContext";
 
 interface TourDetailModalProps {
   tour: Tour | null;
@@ -13,6 +14,7 @@ interface TourDetailModalProps {
 const TourDetailModal = ({ tour, onClose }: TourDetailModalProps) => {
   const [guests, setGuests] = useState(1);
   const { toast } = useToast();
+  const { addOrder } = useOrders();
 
   if (!tour) return null;
 
@@ -20,9 +22,10 @@ const TourDetailModal = ({ tour, onClose }: TourDetailModalProps) => {
   const discount = Math.round((1 - tour.price / tour.originalPrice) * 100);
 
   const handleCheckout = () => {
+    addOrder(tour, guests, total);
     toast({
       title: "🎉 Booking Berhasil!",
-      description: `Tour "${tour.title}" untuk ${guests} orang telah dipesan. Total: Rp ${total.toLocaleString("id-ID")}`,
+      description: `Tour "${tour.title}" untuk ${guests} orang telah dipesan. Silakan cek pesanan untuk pembayaran.`,
     });
     onClose();
   };
