@@ -22,9 +22,10 @@ const TourDetailModal = ({ tour, onClose }: TourDetailModalProps) => {
   const discount = Math.round((1 - tour.price / tour.originalPrice) * 100);
 
   const handleCheckout = () => {
+    addOrder(tour, guests, total);
     toast({
       title: "🎉 Booking Berhasil!",
-      description: `Tour "${tour.title}" untuk ${guests} orang telah dipesan. Total: Rp ${total.toLocaleString("id-ID")}`,
+      description: `Tour "${tour.title}" untuk ${guests} orang telah dipesan. Silakan cek pesanan untuk pembayaran.`,
     });
     onClose();
   };

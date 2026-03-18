@@ -115,6 +115,18 @@ const Navbar = () => {
               {item.label}
             </button>
           ))}
+          <button
+            onClick={() => { setMenuOpen(false); setShowOrders(true); }}
+            className="flex items-center gap-2 text-sm font-body font-medium text-foreground hover:text-accent transition-colors"
+          >
+            <ShoppingBag className="w-4 h-4" />
+            Cek Pesanan
+            {pendingCount > 0 && (
+              <span className="ml-1 w-5 h-5 rounded-full bg-accent text-accent-foreground text-[10px] font-bold flex items-center justify-center">
+                {pendingCount}
+              </span>
+            )}
+          </button>
           <Button
             variant="hero"
             size="sm"
