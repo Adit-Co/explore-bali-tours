@@ -16,6 +16,8 @@ const Navbar = () => {
   }, []);
 
   const navigate = useNavigate();
+  const { orders, setShowOrders } = useOrders();
+  const pendingCount = orders.filter((o) => o.status === "pending").length;
 
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
